@@ -18,14 +18,20 @@ class Konoise():
         return self.g2p(piece, descriptive=descriptive, group_vowels=group_vowels)
     
     def typo(self, sentence:str, config:Config):
-        if len(sentence) <= 1:
+        if len(set(sentence).intersection(typomap)) <= 1:
             return sentence
 
         jamos = split_syllables(sentence)
 
         while random.random() <= config.sentece_typo_rate:
-            err_pos = random.randint(0, len(jamos)-1)
-            typolist = typomap.get(jamos[err_pos])
+            err_pos = -1
+            while err_pos == -1:
+                cand = random.randint(0, len(jamos)-1)
+                if jamos[err_pos] in typomap:
+                    err_pos = cand
+            typolist = typomap.get(jamos[err_pos], [])
+            if len(typolist) <= 1:
+                print(f"{jamos[err_pos]=}: {typolist=}")
             jamos = jamos[:err_pos] + typolist[random.randint(0,len(typolist)-1)] + jamos[err_pos+1:]
 
         return join_jamos(jamos)
