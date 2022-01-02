@@ -7,6 +7,30 @@ Inspired by the operations performed in ["Korean Grammatical Error Correction Ba
  * hangul-utils (without optional dependencies)
  * g2pk-kiwipiepy (actual g2pK would work as well) 
 
+## install
+
+Installation should work using:
+
+```
+pip install git+https://github.com/ketzu/konoise.git
+```
+
+### g2pK(-kiwipiepy)
+
+First install `g2pK` or `g2pK-kiwipiepy` by using
+
+```
+pip install g2pK
+```
+
+or 
+
+```
+pip install git+https://github.com/ketzu/g2pk.git
+```
+
+g2pk-kiwipiepy uses the same package name as g2pk (as it is a drop in replacement), so do not install both, it is just to avoid the dependency on python-mecab-ko.
+
 ## Usage
 
 Konoise exposes a Konoise and Config class. The Konoise class exposes multiple functions, but the intended interface is `process(sentence[, config])`.
