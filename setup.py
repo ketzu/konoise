@@ -5,7 +5,7 @@ with open("README.md", mode="r", encoding="utf-8") as fh:
 
 REQUIRED_PACKAGES = [
     'hangul_utils',
-    'git+https://github.com/ketzu/g2pk.git'
+    #'git+https://github.com/ketzu/g2pk.git'
     # 'g2pK' not sure how to handle alternative g2pK-kiwipiepy as I haven't published it
     # but 'g2pK would work as well
 ]
