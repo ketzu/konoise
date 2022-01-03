@@ -1,4 +1,4 @@
-from g2pk import G2p
+import g2pk
 from hangul_utils import split_syllables, join_jamos
 import random
 from .config import Config, typomap
@@ -10,7 +10,12 @@ class Konoise():
             self.config = config
         else:
             self.config = Config()
-        self.g2p = G2p()
+        
+        try:
+            self.g2p = g2pk.G2p()
+        except Exception as ex:
+            print("Konoise needs g2pk or g2pk-kiwipiepy... try pip install g2pk")
+            raise ex
 
     def piece_to_phoneme(self, piece:str, config: Config):
         descriptive = random.random() <= config.descriptive_probability

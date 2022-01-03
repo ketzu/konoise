@@ -11,11 +11,11 @@ REQUIRED_PACKAGES = [
 ]
 
 setuptools.setup(
-    name="konoise",
+    name="ko_noiser",
     version="0.1.2",
     author="David Moedinger",
     author_email="david.moedinger@ketzu.net",
-    description="konoise: Synthetic Sentence Noise Generator for Korean",
+    description="ko_noiser: Synthetic Sentence Noise Generator for Korean",
     install_requires=REQUIRED_PACKAGES,
     license='MIT',
     long_description=long_description,

@@ -1,4 +1,4 @@
-# konoise - a synthetic sentence noise generator for korean
+# ko_noiser - a synthetic sentence noise generator for korean
 
 Inspired by the operations performed in ["Korean Grammatical Error Correction Based on Transformer with Copying Mechanisms and Grammatical Noise Implantation Methods"](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8070563/) and similar efforts to generate synthetic errors in korean sentences.
 
