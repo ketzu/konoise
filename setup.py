@@ -12,7 +12,7 @@ REQUIRED_PACKAGES = [
 
 setuptools.setup(
     name="konoise",
-    version="0.1.1",
+    version="0.1.2",
     author="David Moedinger",
     author_email="david.moedinger@ketzu.net",
     description="konoise: Synthetic Sentence Noise Generator for Korean",

@@ -30,8 +30,8 @@ class Konoise():
                 if jamos[err_pos] in typomap:
                     err_pos = cand
             typolist = typomap.get(jamos[err_pos], [])
-            if len(typolist) <= 1:
-                print(f"{jamos[err_pos]=}: {typolist=}")
+            if len(typolist) < 1:
+                return sentence
             jamos = jamos[:err_pos] + typolist[random.randint(0,len(typolist)-1)] + jamos[err_pos+1:]
 
         return join_jamos(jamos)
