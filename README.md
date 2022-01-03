@@ -80,6 +80,10 @@ The config has the following, semi self-explanatory options:
     space_add_probability = 0.03
 ```
 
+## Alternative Konoise
+
+There seems to exist a project with the same original name `konoise` on [pypi](https://pypi.org/project/konoise/) doing something similar. Unfortunately I could not find any description.
+
 ## Contributions
 
 Contributions are welcome. NLP and korean are not my areas of expertise.
