@@ -1,11 +1,12 @@
 import csv
-from konoise import Konoise, Config
+from ko_noiser import Konoise, Config
 from multiprocessing import Pool
 from functools import partial
 import tqdm
 
 config = Config()
 # g2p errors
+config.enable_g2p = True
 config.g2p_whole_sentence = True # reduce calles to g2pk, it is slow
 config.g2p_probability = 0.2
 config.descriptive_probability = 0.5
@@ -23,10 +24,13 @@ noise = Konoise(config=config)
 
 def process_line(row, target_row=0, allow_noerror=True, per_sentence=10, prefix=""):
     results = []
-    for _ in range(per_sentence):
-        errored = noise.process(row[target_row])
-        if allow_noerror or row[target_row] != errored:
-            results.append(prefix + errored + "\t"  + row[target_row]+ "\n")
+    try:
+        for _ in range(per_sentence):
+            errored = noise.process(row[target_row])
+            if allow_noerror or row[target_row] != errored:
+                results.append(prefix + errored + "\t"  + row[target_row]+ "\n")
+    except KeyboardInterrupt:
+        pass
     return results
 
 
