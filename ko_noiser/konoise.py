@@ -3,6 +3,13 @@ import csv
 from hangul_utils import split_syllables, join_jamos
 from .config import Config, typomap
 
+try:
+    import importlib.resources as pkg_resources
+except ImportError:
+    # Try backported to PY<37 `importlib_resources`.
+    print('Requires Python >=3.7 or importlib_resources as a fallback. Try pip install importlib_resources')
+    import importlib_resources as pkg_resources
+
 class Konoise():
     def __init__(self, config: Config = None) -> None:
         if config:
@@ -11,12 +18,12 @@ class Konoise():
             self.config = Config()
         
         self.idioms = []
-        with open('idioms.csv', 'r', encoding='utf-8') as idiom_file:
+        with pkg_resources.open_text(__package__, 'idioms.csv', encoding='utf-8') as idiom_file:
             idioms = csv.reader(idiom_file, delimiter='\t')
             for idiom in idioms:
                 self.idioms.append((idiom[0], idiom[1]))
 
-    def idioms(self, sentence:str, config: Config) -> str:
+    def replace_idioms(self, sentence:str, config: Config) -> str:
         def replace_by_idiom(word: str) -> str:
             for idiom in self.idioms:
                 word = word.replace(idiom[0], idiom[1])
@@ -30,7 +37,7 @@ class Konoise():
     def replace_jamo(self, jamos:str, jamo:str, pos:int) -> str:
         return jamos[:pos] + jamo + jamos[pos+1:]
 
-    def typo(self, jamos:str, config:Config):
+    def create_typos(self, jamos:str, config:Config):
         # are there even jamos in this string?
         if len(set(jamos).intersection(typomap)) <= 1:
             return jamos
@@ -60,7 +67,7 @@ class Konoise():
 
         return jamos
 
-    def deletions(self, jamos:str, config:Config) -> str:
+    def create_deletions(self, jamos:str, config:Config) -> str:
         
         dels = 0
         while random.random() <= config.sentence_deletion_rate and dels < config.max_typos:
@@ -70,7 +77,7 @@ class Konoise():
             
         return jamos
 
-    def spacing(self, sentence:str, config:Config) -> str:
+    def create_spacing(self, sentence:str, config:Config) -> str:
         syllables = []
         for syllable in sentence:
             if syllable == ' ': # change to regular expression for whitespace
@@ -102,7 +109,7 @@ class Konoise():
             config = self.config
 
         if config.enable_idiom_replacement:
-            sentence = self.idioms(sentence, config)
+            sentence = self.replace_idioms(sentence, config)
 
         jamos = split_syllables(sentence)
         
@@ -112,15 +119,15 @@ class Konoise():
         # G2p things finished
 
         if config.enable_typos:
-            sentence = self.typo(sentence, config)
+            sentence = self.create_typos(sentence, config)
 
         if config.enable_deletions:
-            sentence = self.deletions(sentence, config)
+            sentence = self.create_deletions(sentence, config)
         
         sentence = join_jamos(jamos)
 
         if config.enable_spacing:
-            sentence = self.spacing(sentence, config)
+            sentence = self.create_spacing(sentence, config)
 
         return sentence
         
