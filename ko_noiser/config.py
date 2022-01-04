@@ -3,16 +3,17 @@
 class Config():
     def __init__(self) -> None:
         # G2P config
-        self.enable_g2p = True
-        self.g2p_whole_sentence = False
-        self.g2p_probability = 0.3
-        self.descriptive_probability = 0.5
-        self.group_vowels_probability = 0.3
-        self.descriptive_always_group_vowels = False
+        self.enable_idiom_replacement = True
 
         # typo config
         self.enable_typos = True
         self.sentece_typo_rate = 0.85
+        self.max_typos = 10
+
+        # deletions config
+        self.enable_deletions = True
+        self.sentence_deletion_rate = 0.01
+        self.max_deletions = 1
 
         # spacing
         self.enable_spacing = True
@@ -60,7 +61,7 @@ typomap = {
  'ㅕ': ['ㅓ','ㅛ','ㅑ'],
  'ㅡ': ['ㅜ','ㅓ','ㅏ'],
  'ㅔ': ['ㅖ','ㅐ'],
-# 
+
  'ㄵ': ['ㅉ','ㅈ'],
  'ㄺ': ['ㄱ','ㄹ','ㄲ'],
  'ㄾ': ['ㄹ','ㅌ'],
