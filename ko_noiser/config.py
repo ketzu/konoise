@@ -3,6 +3,7 @@
 class Config():
     def __init__(self) -> None:
         # G2P config
+        self.enable_g2p = True
         self.g2p_whole_sentence = False
         self.g2p_probability = 0.3
         self.descriptive_probability = 0.5

@@ -18,9 +18,11 @@ class Konoise():
             raise ex
 
     def piece_to_phoneme(self, piece:str, config: Config):
-        descriptive = random.random() <= config.descriptive_probability
-        group_vowels = descriptive if config.descriptive_always_group_vowels else random.random() <= config.group_vowels_probability 
-        return self.g2p(piece, descriptive=descriptive, group_vowels=group_vowels)
+        if config.enable_g2p:
+            descriptive = random.random() <= config.descriptive_probability
+            group_vowels = descriptive if config.descriptive_always_group_vowels else random.random() <= config.group_vowels_probability 
+            return self.g2p(piece, descriptive=descriptive, group_vowels=group_vowels)
+        return piece
     
     def typo(self, sentence:str, config:Config):
         if len(set(sentence).intersection(typomap)) <= 1:
