@@ -4,6 +4,7 @@ class Config():
     def __init__(self) -> None:
         # G2P config
         self.enable_idiom_replacement = True
+        self.idiom_probability = 0.3
 
         # typo config
         self.enable_typos = True

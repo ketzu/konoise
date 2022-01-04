@@ -9,7 +9,7 @@ REQUIRED_PACKAGES = [
 
 setuptools.setup(
     name="ko_noiser",
-    version="0.2.1",
+    version="0.2.2",
     author="David Moedinger",
     author_email="david.moedinger@ketzu.net",
     description="ko_noiser: Synthetic Sentence Noise Generator for Korean",
